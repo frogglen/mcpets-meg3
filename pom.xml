@@ -141,8 +141,9 @@
         </dependency>
         <dependency>
             <groupId>com.ticxo.modelengine</groupId>
-            <artifactId>ModelEngine</artifactId>
-            <version>R4.0.3</version>
+            <artifactId>api</artifactId>
+            <version>R3.1.11</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
