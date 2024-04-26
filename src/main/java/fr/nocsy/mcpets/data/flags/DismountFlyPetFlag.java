@@ -2,7 +2,8 @@ package fr.nocsy.mcpets.data.flags;
 
 import com.ticxo.modelengine.api.ModelEngineAPI;
 import com.ticxo.modelengine.api.model.ModeledEntity;
-import com.ticxo.modelengine.api.model.bone.manager.MountManager;
+import com.ticxo.modelengine.api.mount.MountManager;
+import com.ticxo.modelengine.api.mount.controller.MountController;
 import fr.nocsy.mcpets.MCPets;
 import fr.nocsy.mcpets.data.Pet;
 import fr.nocsy.mcpets.data.config.Language;
@@ -53,10 +54,8 @@ public class DismountFlyPetFlag extends AbstractFlag implements StoppableFlag {
                     ModeledEntity model = ModelEngineAPI.getModeledEntity(uuid);
                     if(model == null)
                         continue;
-                    MountManager mountManager = model.getMountData().getMainMountManager();
-                    if(model.getMountData() == null ||
-                            model.getMountData().getMainMountManager() ==  null ||
-                            model.getMountData().getMainMountManager().getType() == null)
+                    MountManager mountManager = model.getMountManager();
+                    if(mountManager.getDriverController() == null)
                         continue;
                     if(!mountManager.hasRiders())
                         continue;
@@ -65,7 +64,7 @@ public class DismountFlyPetFlag extends AbstractFlag implements StoppableFlag {
                     {
                         String controllerClass = ModelEngineAPI.getMountPairManager().getController(owner).getClass().getSimpleName();
                         String petMountType = pet.getMountType();
-                        String type = petMountType + " " + model.getMountData().getMainMountManager().getType().getId() + " " + controllerClass;
+                        String type = mountManager.getDriverController().getClass().getSimpleName() + " " + controllerClass;
                         if(!type.toUpperCase().contains("FLY"))
                             continue;
                     }
