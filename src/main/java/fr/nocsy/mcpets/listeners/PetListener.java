@@ -196,7 +196,7 @@ public class PetListener implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             Pet pet = Pet.fromOwner(p.getUniqueId());
-            if(pet != null && pet.hasMount(p))
+            if(pet != null && pet.hasRider(p))
             {
                 pet.dismount(p);
             }
